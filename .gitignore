@@ -1,41 +1,42 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# 백엔드 (스프링부트) Gradle 캐시 및 빌드 결과
+backend/.gradle/
+backend/build/
+backend/out/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# 프론트엔드
+/frontend/node_modules/
+/frontend/.next/
+/frontend/out/
+/frontend/build/
+/frontend/.vercel/
+/frontend/coverage/
+/frontend/.pnpm-debug.log*
+/frontend/.pnp
+/frontend/.pnp.*
+/frontend/.yarn/*
+!/frontend/.yarn/patches
+!/frontend/.yarn/plugins
+!/frontend/.yarn/releases
+!/frontend/.yarn/versions
+/frontend/next-env.d.ts
+/frontend/*.tsbuildinfo
 
-# testing
-/coverage
+# IDE 관련
+.idea/
+*.iml
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
+# 운영체제 관련
 .DS_Store
-*.pem
 
-# debug
+# 로그 파일
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# 환경파일 및 민감정보
 .env*
+application-secret.yml
 
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# 인증서 등 민감 파일
+*.pem
