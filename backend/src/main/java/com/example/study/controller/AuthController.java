@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -29,7 +30,8 @@ public class AuthController {
         return userRepository.findByUsername(username)
                 .map(user -> {
                     if (user.getPassword().equals(password)) {
-                        session.setAttribute("user", user); // ✅ 세션에 사용자 저장
+                        session.setAttribute("id", user.getId());
+                        session.setAttribute("username", user.getUsername());
                         return ResponseEntity.ok("로그인 성공");
                     } else {
                         return ResponseEntity.status(401).body("비밀번호 불일치");
@@ -40,9 +42,14 @@ public class AuthController {
     // 로그인 상태 확인 API
     @GetMapping("/me")
     public ResponseEntity<?> me(HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user != null) {
-            return ResponseEntity.ok(user.getUsername()); // 필요한 사용자 정보만 반환
+        Object id = session.getAttribute("id");
+        Object username = session.getAttribute("username");
+
+        if (id != null && username != null) {
+            Map<String, Object> userInfo = new HashMap<>();
+            userInfo.put("id", id);
+            userInfo.put("username", username);
+            return ResponseEntity.ok(userInfo);
         } else {
             return ResponseEntity.status(401).body("로그인 필요");
         }

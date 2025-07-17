@@ -4,13 +4,23 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import api from "./api";
 
+
+
 export default function Home() {
-  // 로그인 상태확인
-  const [isLogin, setIsLogin] = useState(false);
+  // 로그인 확인
+  type UserInfo = {
+    id: number;
+    username: string;
+  };
+  const [user, setUser] = useState<UserInfo | null>(null);
   useEffect(() => {
     api.get("/api/auth/me")
-      .then(() => setIsLogin(true))
-      .catch(() => setIsLogin(false));
+      .then(res => {
+        setUser(res.data);
+      })
+      .catch(() => {
+        setUser(null);
+      })
   }, []);
 
   const handleLogout = async () => {
@@ -25,9 +35,11 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
       <h1 className="text-4xl font-bold mb-4">홈페이지</h1>
+
+      {user === null ? (null) : (<p className="text-lg text-gray-700 mb-6">{user.username}님 반갑습니다.</p>)}
       <p className="text-lg text-gray-700 mb-6">이동할 페이지를 선택하세요</p>
       <div className="flex">
-        {isLogin ?
+        {user !== null ?
           (<div>
             <button
               onClick={handleLogout}
