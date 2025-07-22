@@ -1,5 +1,3 @@
-// src/main/java/com/example/study/controller/AuthController.java
-
 package com.example.study.controller;
 
 import com.example.study.entity.User;
@@ -13,7 +11,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class AuthController {
 
     private final UserRepository userRepository;
@@ -21,7 +18,7 @@ public class AuthController {
     public AuthController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
+    // 로그인
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> body, HttpSession session) {
         String username = body.get("username");
@@ -39,7 +36,7 @@ public class AuthController {
                 })
                 .orElse(ResponseEntity.status(401).body("존재하지 않는 사용자"));
     }
-    // 로그인 상태 확인 API
+    // 로그인 상태 확인
     @GetMapping("/me")
     public ResponseEntity<?> me(HttpSession session) {
         Object id = session.getAttribute("id");
@@ -55,7 +52,7 @@ public class AuthController {
         }
     }
 
-    // 로그아웃 API
+    // 로그아웃
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpSession session) {
         session.invalidate();

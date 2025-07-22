@@ -62,7 +62,6 @@ export default function MapPage() {
     const handleSubmit = async () => {
         try {
             await api.post("/api/markers", {
-                user_id: user?.id,
                 title: title,
                 latitude: position?.lat ?? center.lat,
                 longitude: position?.lng ?? center.lng,
@@ -86,6 +85,7 @@ export default function MapPage() {
             console.error(error);
         }
     };
+
     return (
         <div className="w-full h-screen">
             <Map // 지도를 표시할 컨테이너

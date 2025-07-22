@@ -1,5 +1,3 @@
-// src/main/java/com/example/study/WebConfig.java
-
 package com.example.study;
 
 import org.springframework.context.annotation.Configuration;

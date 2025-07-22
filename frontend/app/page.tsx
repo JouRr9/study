@@ -56,8 +56,13 @@ export default function Home() {
             </Link>
           </div>)}
         <Link href="/map">
-          <button className="px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+          <button className="mr-4 px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600">
             지도
+          </button>
+        </Link>
+        <Link href="/chat">
+          <button className="px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+            채팅
           </button>
         </Link>
       </div>

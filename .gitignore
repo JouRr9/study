@@ -2,6 +2,7 @@
 backend/.gradle/
 backend/build/
 backend/out/
+backend/src/main/resources/application.properties
 
 # 프론트엔드
 /frontend/node_modules/
